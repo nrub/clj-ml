@@ -1,5 +1,5 @@
-(ns clj-ml.filters-test
-  (:use [clj-ml filters data] :reload-all)
+(ns clj-ml-dev.filters-test
+  (:use [clj-ml-dev filters data] :reload-all)
   (:use clojure.test midje.sweet))
 
 (deftest make-filter-options-supervised-discretize
@@ -194,7 +194,7 @@
                                   (-> instance
                                       instance-to-vector
                                       (conj (- a-max (.value instance 0)))
-                                      (#(weka.core.Instance. 1 (into-array Double/TYPE %)))
+                                      (#(weka.core.DenseInstance. 1 (into-array Double/TYPE %)))
                                       add-instance))
                                 result))
         res (clj-batch ds

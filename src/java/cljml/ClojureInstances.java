@@ -3,9 +3,9 @@ package cljml;
 import clojure.lang.ISeq;
 import java.io.IOException;
 import java.util.Iterator;
-import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.Attribute;
 /**
  * A wrapper around Weka's Instances class to add some Clojure behavior.
  *
@@ -53,7 +53,11 @@ public class ClojureInstances extends weka.core.Instances implements Iterable<we
         super(reader);
     }
 
-    public ClojureInstances(java.lang.String name, FastVector attInfo, int capacity) {
+    public ClojureInstances(java.io.Reader reader, int capacity) throws IOException {
+        super(reader, capacity);
+    }
+
+    public ClojureInstances(java.lang.String name, java.util.ArrayList<Attribute> attInfo, int capacity) {
         super(name, attInfo, capacity);
     }
 

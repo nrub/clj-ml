@@ -4,11 +4,11 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.kernel-functions
+  clj-ml-dev.kernel-functions
   "Kernel functions that can be passed as parameters to support vector machines classifiers.
 
    Polynomic, radial basis and string kernels are supported"
-  (:use [clj-ml utils data options-utils])
+  (:use [clj-ml-dev utils data options-utils])
   (:import (weka.classifiers.functions.supportVector PolyKernel RBFKernel StringKernel)))
 
 (defmulti make-kernel-function-options

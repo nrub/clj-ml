@@ -1,5 +1,17 @@
 # clj-ml History
 
+## v0.3.0 - 2013-03-10
+
+ * Upgrade to weka-dev 3.7.8
+ * Instances are now an interface in WEKA 3.7.8. Default to DenseInstance
+ * ClojureInstances.java no longer uses a constructor with FastVector
+ * ClojureInstances.java includes new constructor functions that are now
+   in Instances
+ * Remove FastRandomForest, RotationForest, PaceRegression, & SPegasos
+   classifiers, which are no longer in the WEKA API
+ * Remove ChiSquaredAttributeEval, GeneticSearch, RankSearch, & LinearForwardSelection
+   from attribute selections, which are no longer in the WEKA API
+
 ## v0.2.4 - 2012-07-09
 
  * More Maven appeasement....

@@ -4,7 +4,7 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.clusterers
+  clj-ml-dev.clusterers
   "This namespace contains several functions for
    building clusterers using different clustering algorithms. K-means, Cobweb and
    Expectation maximization algorithms are currently supported.
@@ -13,7 +13,7 @@
    having the full data set in main memory. Functions for evaluating the clusterer
    as well as for clustering new instances are also supported
 "
-  (:use [clj-ml utils data distance-functions options-utils])
+  (:use [clj-ml-dev utils data distance-functions options-utils])
   (:import (java.util Date Random)
            (weka.clusterers ClusterEvaluation SimpleKMeans Cobweb EM)))
 
@@ -252,7 +252,7 @@
 (defn clusterer-cluster
   "Add a class to each instance according to the provided clusterer"
   ([clusterer dataset]
-     (let [attributes (conj (clj-ml.data/dataset-format dataset)
+     (let [attributes (conj (clj-ml-dev.data/dataset-format dataset)
                             {:class (map #(keyword (str %1)) (range 0 (.numberOfClusters clusterer)))})
            clustered (map (fn [i] (conj (instance-to-vector i)
                                         (keyword (str (.clusterInstance clusterer i)))))

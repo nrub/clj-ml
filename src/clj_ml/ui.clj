@@ -4,9 +4,9 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.ui
+  clj-ml-dev.ui
   "Namespace containing functions for plotting classifiers, clusterers and data sets."
-  (:use (clj-ml data utils clusterers)
+  (:use (clj-ml-dev data utils clusterers)
         (incanter core stats charts))
   (:import (weka.clusterers ClusterEvaluation SimpleKMeans)))
 
@@ -18,7 +18,7 @@
       plot))
 
 (defmulti display-object
-  "Displays some kind of clj-ml object"
+  "Displays some kind of clj-ml-dev object"
   (fn [kind chart data opts] [kind chart]))
 
 (defmethod display-object [:dataset :boxplot]
@@ -173,28 +173,28 @@
 
 ;(defn load-test-from-slime []
 ;  (do
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/joda-time-1.6.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/opencsv-2.0.1.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/classes/")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/joda-time-1.6.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/opencsv-2.0.1.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/classes/")
 ;    (add-classpath "file:///Applications/weka-3-6-2/weka.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/src/")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-charts-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-core-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-io-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-processing-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-chrono-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-full-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/incanter-mongodb-1.0-master-SNAPSHOT.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/jfreechart-1.0.13.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/parallelcolt-0.7.2.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/arpack-combo-0.1.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/gnujaxp-1.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/clojure-json-1.1-20091229.021828-4.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/clojure-db-object-0.1.1-20091229.021828-2.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/jcommon-1.0.16.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/netlib-java-0.9.1.jar")
-;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml/lib/processing-core-1.jar")
-;    (add-classpath"file:///Users/antonio.garrote/Development/old/clj-ml/lib/congomongo-0.1.1-20091229.021828-1.jar")
-;    (add-classpath"file:///Users/antonio.garrote/Development/old/clj-ml/lib/mongo-1.0.jar")
-;    (add-classpath"file:///Users/antonio.garrote/Development/old/clj-ml/lib/mongo-java-driver-1.1.0-20091229.021828-3.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/src/")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-charts-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-core-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-io-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-processing-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-chrono-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-full-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/incanter-mongodb-1.0-master-SNAPSHOT.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/jfreechart-1.0.13.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/parallelcolt-0.7.2.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/arpack-combo-0.1.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/gnujaxp-1.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/clojure-json-1.1-20091229.021828-4.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/clojure-db-object-0.1.1-20091229.021828-2.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/jcommon-1.0.16.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/netlib-java-0.9.1.jar")
+;    (add-classpath "file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/processing-core-1.jar")
+;    (add-classpath"file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/congomongo-0.1.1-20091229.021828-1.jar")
+;    (add-classpath"file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/mongo-1.0.jar")
+;    (add-classpath"file:///Users/antonio.garrote/Development/old/clj-ml-dev/lib/mongo-java-driver-1.1.0-20091229.021828-3.jar")
 ;    ))

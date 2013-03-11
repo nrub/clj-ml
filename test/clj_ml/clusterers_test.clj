@@ -1,5 +1,5 @@
-(ns clj-ml.clusterers-test
-  (:use [clj-ml clusterers data] :reload-all)
+(ns clj-ml-dev.clusterers-test
+  (:use [clj-ml-dev clusterers data] :reload-all)
   (:use clojure.test midje.sweet))
 
 (deftest make-clusterers-options-k-means
@@ -21,7 +21,7 @@
     (is (= weka.clusterers.SimpleKMeans (class c)))))
 
 (deftest make-clusterer-with-distance
-  (let [c (clj-ml.clusterers/make-clusterer :k-means {:distance-function {:manhattan {:attributes [0 1 2]}}})]
+  (let [c (clj-ml-dev.clusterers/make-clusterer :k-means {:distance-function {:manhattan {:attributes [0 1 2]}}})]
     (is (= weka.core.ManhattanDistance (class (.getDistanceFunction c))))))
 
 (deftest test-make-cobweb
@@ -34,7 +34,7 @@
   (let [ds (make-dataset :test [:a :b] [])
         c (make-clusterer :cobweb)]
        (clusterer-build c ds)
-       (clusterer-update c (clj-ml.data/make-instance ds [1 2]))
+       (clusterer-update c (clj-ml-dev.data/make-instance ds [1 2]))
        (is true)))
 
 (deftest test-update-clusterer-cobweb-many-instances

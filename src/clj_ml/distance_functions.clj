@@ -4,12 +4,12 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.distance-functions
+  clj-ml-dev.distance-functions
   "Generates different distance metrics that can be passed as parameters to certain
    classifiers and clusterers like K-Means.
 
    Euclidean, Manhattan and Chebysev distance functions are supported."
-  (:use [clj-ml utils data options-utils])
+  (:use [clj-ml-dev utils data options-utils])
   (:import (weka.core EuclideanDistance ManhattanDistance ChebyshevDistance)))
 
 

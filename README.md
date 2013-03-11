@@ -1,6 +1,10 @@
-# clj-ml
+# clj-ml-dev
 
-A machine learning library for Clojure built on top of Weka and friends.
+A machine learning library for Clojure built on top of Weka and
+friends.
+
+This fork uses the development version of the WEKA library, and may
+not have functions being used in past versions of this library.
 
 ## Installation
 
@@ -16,21 +20,21 @@ git clone the project, then run:
 
 ### Installing from Clojars
 
-    [com.leadtune/clj-ml "0.2.4"]
+    [org.clojars.penglish/clj-ml-dev "0.3.0"]
 
 ### Installing from Maven
 
 (add Clojars repository)
 
     <dependency>
-      <groupId>clj-ml</groupId>
-      <artifactId>clj-ml</artifactId>
-      <version>0.2.4</version>
+      <groupId>clj-ml-dev</groupId>
+      <artifactId>clj-ml-dev</artifactId>
+      <version>0.3.0</version>
     </dependency>
 
 ## Supported algorithms
 
- * Filters
+* Filters
    * supervised discretize
    * unsupervised discretize
    * supervised nominal to binary
@@ -46,11 +50,11 @@ git clone the project, then run:
 
 ## Usage
 
-API documenation can be found [here](http://antoniogarrote.github.com/clj-ml/index.html).
+API documenation can be found [here](http://antoniogarrote.github.com/clj-ml-dev/index.html).
 
 ### I/O of data
 
-    REPL>(use 'clj-ml.io)
+    REPL>(use 'clj-ml-dev.io)
 
     REPL>; Loading data from an ARFF file, XRFF and CSV are also supported
     REPL>(def ds (load-instances :arff "file:///Applications/weka-3-6-2/data/iris.arff"))
@@ -60,7 +64,7 @@ API documenation can be found [here](http://antoniogarrote.github.com/clj-ml/ind
 
 ### Working with datasets
 
-    REPL>(use 'clj-ml.data)
+    REPL>(use 'clj-ml-dev.data)
 
     REPL>; Defining a dataset
     REPL>(def ds (make-dataset "name" [:length :width {:kind [:good :bad]}] [ [12 34 :good] [24 53 :bad] ]))
@@ -91,7 +95,7 @@ API documenation can be found [here](http://antoniogarrote.github.com/clj-ml/ind
 
 ### Filtering datasets
 
-    REPL>(use '(clj-ml filters io))
+    REPL>(use '(clj-ml-dev filters io))
 
     REPL>(def ds (load-instances :arff "file:///Applications/weka-3-6-2/data/iris.arff"))
 
@@ -113,7 +117,7 @@ API documenation can be found [here](http://antoniogarrote.github.com/clj-ml/ind
 
 ### Using classifiers
 
-    REPL>(use 'clj-ml.classifiers)
+    REPL>(use 'clj-ml-dev.classifiers)
 
     REPL>; Building a classifier using a  C4.5 decission tree
     REPL>(def classifier (make-classifier :decission-tree :c45))
@@ -214,13 +218,13 @@ API documenation can be found [here](http://antoniogarrote.github.com/clj-ml/ind
 
 
     REPL>; The classifiers can be saved and restored later
-    REPL>(use 'clj-ml.utils)
+    REPL>(use 'clj-ml-dev.utils)
 
     REPL>(serialize-to-file classifier "/Users/antonio.garrote/Desktop/classifier.bin")
 
 ### Using clusterers
 
-    REPL>(use 'clj-ml.clusterers)
+    REPL>(use 'clj-ml-dev.clusterers)
 
     REPL> ; we build a clusterer using k-means and three clusters
     REPL> (def kmeans (make-clusterer :k-means {:number-clusters 3}))

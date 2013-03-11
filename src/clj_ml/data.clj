@@ -4,15 +4,15 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.data
+  clj-ml-dev.data
   "This namespace contains several functions for
    building creating and manipulating data sets and instances. The formats of
    these data sets as well as their classes can be modified and assigned to
    the instances. Finally data sets can be transformed into Clojure sequences
    that can be transformed using usual Clojure functions like map, reduce, etc."
-  (:use [clj-ml utils])
-  (:require [clj-ml.filters :as filters])
-  (:import (weka.core Instance Instances FastVector Attribute)
+  (:use [clj-ml-dev utils])
+  (:require [clj-ml-dev.filters :as filters])
+  (:import (weka.core Instance DenseInstance Instances FastVector Attribute)
            (cljml ClojureInstances)))
 
 (declare dataset-seq)
@@ -130,7 +130,7 @@
   ([dataset vector]
      (make-instance dataset 1 vector))
   ([dataset weight vector]
-     (let [^Instance inst (new Instance (.numAttributes ^ClojureInstances dataset))]
+     (let [^Instance inst (new DenseInstance (.numAttributes ^ClojureInstances dataset))]
        (do (.setDataset inst dataset)
            (loop [vs vector
                   c 0]
@@ -380,14 +380,14 @@ becuase it avoids redundant string interning of the attribute names."
 (defn dataset-as-lists
   "Returns a lazy sequence of the dataset represented as lists.  The values
    are the actual values (i.e. the string values) and not weka's internal
-   double representation or clj-ml's keyword representation."
+   double representation or clj-ml-dev's keyword representation."
   [dataset]
   (map instance-to-list (dataset-seq dataset)))
 
 (defn dataset-as-vecs
   "Returns a lazy sequence of the dataset represented as lists.  The values
    are the actual values (i.e. the string values) and not weka's internal
-   double representation or clj-ml's keyword representation."
+   double representation or clj-ml-dev's keyword representation."
   [dataset]
   (map instance-to-vector (dataset-seq dataset)))
 

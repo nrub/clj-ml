@@ -1,5 +1,5 @@
-(ns clj-ml.utils-test
-  (:use [clj-ml utils] :reload-all)
+(ns clj-ml-dev.utils-test
+  (:use [clj-ml-dev utils] :reload-all)
   (:use [clojure.test]))
 
 (deftest test-into-fast-vecotor

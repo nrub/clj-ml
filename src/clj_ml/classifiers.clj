@@ -4,7 +4,7 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.classifiers
+  clj-ml-dev.classifiers
   "This namespace contains several functions for building classifiers using different
    classification algorithms: Bayes networks, multilayer perceptron, decision tree or
    support vector machines are available. Some of these classifiers have incremental
@@ -15,7 +15,7 @@
 
    A sample use of the API for classifiers is shown below:
 
-    (use 'clj-ml.classifiers)
+    (use 'clj-ml-dev.classifiers)
 
     ; Building a classifier using a  C4.5 decision tree
     (def *classifier* (make-classifier :decision-tree :c45))
@@ -55,19 +55,18 @@
 
    Finally a classifier can be stored in a file for later use:
 
-    (use 'clj-ml.utils)
+    (use 'clj-ml-dev.utils)
 
     (serialize-to-file *classifier*
      \"/Users/antonio.garrote/Desktop/classifier.bin\")
 "
-  (:use [clj-ml utils data kernel-functions options-utils])
+  (:use [clj-ml-dev utils data kernel-functions options-utils])
   (:import (java.util Date Random)
-           (hr.irb.fastRandomForest FastRandomForest)
            (weka.core Instance Instances)
            (weka.classifiers.trees J48 RandomForest M5P)
-           (weka.classifiers.meta LogitBoost AdditiveRegression RotationForest)
+           (weka.classifiers.meta LogitBoost AdditiveRegression)
            (weka.classifiers.bayes NaiveBayes NaiveBayesUpdateable)
-           (weka.classifiers.functions MultilayerPerceptron SMO LinearRegression Logistic PaceRegression SPegasos)
+           (weka.classifiers.functions MultilayerPerceptron SMO LinearRegression Logistic)
            (weka.classifiers Classifier Evaluation)))
 
 
@@ -127,16 +126,6 @@
                                 :epsilon-roundoff "-P"
                                 :folds-for-cross-validation "-V"
                                 :random-seed "-W"}))))
-
-(defmethod make-classifier-options [:support-vector-machine :spegasos]
-  ([kind algorithm m]
-     (->> (check-options m {:no-normalization "-N"
-                            :no-replace-missing"-M"})
-          (check-option-values m
-                               {:loss-fn "-F"
-                                :epochs "-E"
-                                :lambda "-L"}))))
-
 
 (defmethod make-classifier-options [:regression :linear]
   ([kind algorithm m]
@@ -202,20 +191,6 @@
                                 :random-seed "-S"
                                 :depth "-depth"}))))
 
-(defmethod make-classifier-options [:decision-tree :rotation-forest]
-  ([kind algorithm m]
-     (->>
-       (check-options m {:debug "-D"})
-       (check-option-values m
-                               {:num-iterations "-I"
-                                :use-number-of-groups "-N"
-                                :min-attribute-group-size "-G"
-                                :max-attribute-group-size "-H"
-                                :percentage-of-instances-to-remove "-P"
-                                :filter "-F"
-                                :random-seed "-S"
-                                :weak-learning-class "-W"}))))
-
 (defmethod make-classifier-options [:decision-tree :m5p]
   ([kind algorithm m]
      (->>
@@ -251,7 +226,7 @@
      - :decision-tree :boosted-decision-tree
      - :decision-tree :M5P
      - :decision-tree :random-forest
-     - :decision-tree :rotation-forest
+;;     - :decision-tree :rotation-forest
      - :bayes :naive
      - :neural-network :mutilayer-perceptron
      - :support-vector-machine :smo
@@ -304,7 +279,7 @@
             Use kernel desity estimator rather than normal. Sample value: true
         - :supervised-discretization
             Use supervised discretization to to process numeric attributes (see :supervised-discretize
-            filter in clj-ml.filters/make-filter function). Sample value: true
+            filter in clj-ml-dev.filters/make-filter function). Sample value: true
 
     * :neural-network :multilayer-perceptron
 
@@ -316,7 +291,7 @@
 
         - :no-nominal-to-binary
             A :nominal-to-binary filter will not be applied by default. (see :supervised-nominal-to-binary
-            filter in clj-ml.filters/make-filter function). Default value: false
+            filter in clj-ml-dev.filters/make-filter function). Default value: false
         - :no-numeric-normalization
             A numeric class will not be normalized. Default value: false
         - :no-nomalization
@@ -418,10 +393,6 @@
             (.setKernel classifier real-kernel)))
         classifier)))
 
-(defmethod make-classifier [:support-vector-machine :spegasos]
-  ([kind algorithm & options]
-     (make-classifier-with kind algorithm SPegasos options)))
-
 (defmethod make-classifier [:regression :linear]
   ([kind algorithm & options]
      (make-classifier-with kind algorithm LinearRegression options)))
@@ -429,10 +400,6 @@
 (defmethod make-classifier [:regression :logistic]
   ([kind algorithm & options]
      (make-classifier-with kind algorithm Logistic options)))
-
-(defmethod make-classifier [:regression :pace]
-  ([kind algorithm & options]
-     (make-classifier-with kind algorithm PaceRegression options)))
 
 (defmethod make-classifier [:regression :boosted-regression]
   ([kind algorithm & options]
@@ -446,14 +413,6 @@
   ([kind algorithm & options]
      (make-classifier-with kind algorithm RandomForest options)))
 
-(defmethod make-classifier [:decision-tree :fast-random-forest]
-  ([kind algorithm & options]
-     (make-classifier-with kind algorithm FastRandomForest options)))
-
-(defmethod make-classifier [:decision-tree :rotation-forest]
-  ([kind algorithm & options]
-     (make-classifier-with kind algorithm RotationForest options)))
-
 (defmethod make-classifier [:decision-tree :m5p]
   ([kind algorithm & options]
      (make-classifier-with kind algorithm M5P options)))
@@ -465,16 +424,6 @@
   ([^Classifier classifier dataset]
      (do (.buildClassifier classifier dataset)
          classifier)))
-
-(defn classifier-copy
-  "Performs a deep copy of the classifier"
-  [^Classifier classifier]
-  (Classifier/makeCopy classifier))
-
-(defn classifier-copy-and-train
-  "Performs a deep copy of the classifier, trains the copy, and returns it."
-  [classifier dataset]
-  (classifier-train (classifier-copy classifier) dataset))
 
 (defn classifier-update
   "If the classifier is updateable it updates the classifier with the given instance or set of instances."

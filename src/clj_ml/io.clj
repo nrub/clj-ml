@@ -4,7 +4,7 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.io
+  clj-ml-dev.io
   "Functions for reading and saving datasets, classifiers and clusterers to files and other
    persistence mechanisms."
   (:import (weka.core.converters CSVLoader ArffLoader XRFFLoader)

@@ -1,5 +1,5 @@
-(ns clj-ml.data-test
-  (:use [clj-ml.data] :reload-all)
+(ns clj-ml-dev.data-test
+  (:use [clj-ml-dev.data] :reload-all)
   (:use [clojure.test]))
 
 (deftest make-instance-num
@@ -8,7 +8,7 @@
                               1)
         inst (make-instance dataset [1 2])]
   (is (= (class inst)
-         weka.core.Instance))
+         weka.core.DenseInstance))
   (is (= 2 (.numValues inst)))
   (is (= 1.0 (.value inst 0)))
   (is (= 2.0 (.value inst 1)))))
@@ -19,7 +19,7 @@
                               1)
         inst (make-instance dataset [1 :b1])]
   (is (= (class inst)
-         weka.core.Instance))
+         weka.core.DenseInstance))
   (is (= 2 (.numValues inst)))
   (is (= 1.0 (.value inst 0)))
   (is (= "b1" (.stringValue inst 1)))))
@@ -30,17 +30,17 @@
                               1)
         inst (make-instance dataset [1 nil])]
   (is (= (class inst)
-         weka.core.Instance))
+         weka.core.DenseInstance))
   (is (= 2 (.numValues inst)))
   (is (= 1.0 (.value inst 0)))
   (is (Double/isNaN (.value inst 1)))))
 
 (deftest dataset-make-dataset-with-default-class
-  (let [ds (clj-ml.data/make-dataset :test [:a :b {:c [:d :e]}] [] {:class :c})
-        ds2 (clj-ml.data/make-dataset :test [:a :b {:c [:d :e]}] [] {:class 2})]
-    (is (= (clj-ml.data/dataset-class-name ds)
+  (let [ds (clj-ml-dev.data/make-dataset :test [:a :b {:c [:d :e]}] [] {:class :c})
+        ds2 (clj-ml-dev.data/make-dataset :test [:a :b {:c [:d :e]}] [] {:class 2})]
+    (is (= (clj-ml-dev.data/dataset-class-name ds)
            :c))
-    (is (= (clj-ml.data/dataset-class-index ds2)
+    (is (= (clj-ml-dev.data/dataset-class-index ds2)
            2))))
 
 
@@ -48,7 +48,7 @@
   (let [dataset (make-dataset :test
                               [:a :b]
                               2)
-         _ (clj-ml.data/dataset-set-class dataset 1)]
+         _ (clj-ml-dev.data/dataset-set-class dataset 1)]
     (is (= 1 (.classIndex dataset)))
     (is (= 0 (.classIndex (dataset-set-class dataset 0))))
     (testing "when a string or symbol is passed in"

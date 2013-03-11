@@ -5,7 +5,7 @@
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"
        :skip-wiki true}
-  clj-ml.utils
+  clj-ml-dev.utils
   (:import (java.io ObjectOutputStream ByteArrayOutputStream
                     ByteArrayInputStream ObjectInputStream
                     FileOutputStream FileInputStream)

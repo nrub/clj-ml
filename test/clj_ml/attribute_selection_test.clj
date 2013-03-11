@@ -1,5 +1,5 @@
-(ns clj-ml.attribute-selection-test
-  (:use [clj-ml attribute-selection data] :reload-all)
+(ns clj-ml-dev.attribute-selection-test
+  (:use [clj-ml-dev attribute-selection data] :reload-all)
   (:use clojure.test midje.sweet))
 
 (deftest make-greedy-options

@@ -5,8 +5,8 @@
 
 (ns #^{:author "Ben Mabey <ben@benmabey.com>"
        :skip-wiki true}
-  clj-ml.options-utils
-  (:use [clj-ml utils])
+  clj-ml-dev.options-utils
+  (:use [clj-ml-dev utils])
   (:require [clojure [string :as str]]))
 
 ;; Manipulation of array of options

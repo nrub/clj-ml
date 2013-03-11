@@ -4,7 +4,7 @@
 ;;
 
 (ns #^{:author "Antonio Garrote <antoniogarrote@gmail.com>"}
-  clj-ml.filters
+  clj-ml-dev.filters
   "This namespace defines a set of functions that can be applied to data sets to modify the
    dataset in some way: transforming nominal attributes into binary attributes, removing
    attributes etc.
@@ -36,7 +36,7 @@
    The previous sample of code could be rewritten with the make-apply-filter function:
 
      (def filtered-ds (make-apply-filter :remove-attributes {:attributes [:a :c]} ds))"
-  (:use [clj-ml utils options-utils])
+  (:use [clj-ml-dev utils options-utils])
   (:require [clojure [string :as str]])
   (:import (weka.filters Filter)
            (weka.core OptionHandler)
@@ -110,7 +110,7 @@
 (deffilter numeric-to-nominal)
 
 (def attribute-types
-  "Mapping of Weka's attribute types from clj-ml keywords to the -T flag's representation."
+  "Mapping of Weka's attribute types from clj-ml-dev keywords to the -T flag's representation."
   {:numeric "NUM" :nominal "NOM" :string "STR" :date "DAT"})
 
 (defmethod make-filter-options :add-attribute
@@ -417,7 +417,7 @@
             process-fn and nothing needs to be passed for this fn.
 
    For examples on how to use the filters, especially the clojure filters, you may
-   refer to filters_test.clj of clj-ml."
+   refer to filters_test.clj of clj-ml-dev."
   [kind options]
   (let [^Filter filter (if-let [^Class class (kind filter-aliases)]
                          (let [^OptionHandler f (.newInstance class)]
